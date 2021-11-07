@@ -1,0 +1,37 @@
+﻿%%% Odtud mazat "barevný" text
+\textcolor{blue}{\em Do finálního PDF souboru s~Vaší AP, kterou vypálíte na CD/DVD a~nahrajete na MOODLE, vložte naskenovaný datum a~podpis na prohlášení. Můžete postupovat takto. Naskenujte datum a podpis na prohlášení do souboru \texttt{signature.jpg} (rozlišení cca 730$\times$70). Tento jpg-soubor uložte do složky \texttt{00\_files/Figures/Scan/}. Nakonec pře\-kon\-ver\-tuj\-te \texttt{signature.jpg} na \texttt{signature.eps}. Ke konverzi do formátu EPS můžete využít matlabovský m-file \texttt{ScanAPjpg2eps.m}, který stačí spustit.\/}
+
+\textcolor{blue}{\em Tento text se nachází na začátku souboru \texttt{00\_files/Declar.tex}. V~momentě, kdy výše uvedené provedete, tento barevný text vymažte.\/} 
+%%% sem mazat "barevný" text
+
+\vfill
+
+\section*{Declaration}
+
+I declare that I have prepared my thesis independently, and I have used only thematerials (literature, projects, software, etc.) listed in the attached list.
+
+\vspace{0.5cm}
+
+\begin{table}[!hbp]
+\begin{tabular}{lr}
+\!\!V~Sezimově Ústí dne
+  \begin{tabular}{p{2.5cm}}
+    \\
+    \hline
+  \end{tabular}
+ &
+ \hspace{4cm}
+ \begin{tabular}{p{3.5cm}}
+    \vspace{0.6cm} \\
+    \hline \hspace{1cm} podpis
+ \end{tabular}
+\end{tabular}
+\end{table}
+
+\begin{textblock}{13}[0,0](5,12.7)
+    \ifnum \APforPrint=0
+        \includegraphics[width=12cm]{\cestaFiles Figures/Scan/signature}
+    \fi
+\end{textblock}
+
+\vglue 1cm
