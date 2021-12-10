@@ -1,5 +1,7 @@
 ﻿%\documentclass[a4paper,12pt, draft]{report}                         %print on one side
 \documentclass[a4paper,12pt, twoside,notitlepage,openright]{report} %print on both side
+
+
 \usepackage[bookmarks=false, colorlinks=false,unicode]{hyperref}
 \usepackage[abbr,dcucite]{harvard}      %style ofliterature
 \usepackage{index}                      %make index
@@ -8,6 +10,7 @@
 %\usepackage{showframe}                  %show edges of pages (for oneside, comment line 
                                             %\setlength{\oddsidemargin}{5mm} in COP.sty)
 %%%%% HERE PUT ALL THE RELEVANT PACKAGES
+
 
 \usepackage{pdfpages} % pokud nemáte formulář "Zadání bak./dipl. práce" naskenovaný jako PDF, tak ZAKOMENTUJTE
 
@@ -43,7 +46,9 @@
 
 % for table footnotes and captions
 \usepackage{caption}
-\usepackage{subcaption}
+%% \usepackage{subcaption}
+
+
 
 % for printing of units
 \usepackage{siunitx}
@@ -56,6 +61,10 @@
 \usepackage{dirtytalk}
 
 \usepackage{comment}
+
+
+
+
 
 
 %-----<<<<<<<<<<<< NAMES NAD PATHS >>>>>>>>>>>>-----
@@ -81,6 +90,7 @@
 \def \cestaTri {03_Chapter3/}
 \def \cestaCtyri {04_Chapter4/}
 \def \cestaPet {05_Chapter5/}
+\def \cestaSest {06_Chapter6/}
 \def \cestaZaver {05_Concl/}
 \def \cestaAP {A_Appendices/}
 \def \cestaStyles {Styles/}
@@ -188,6 +198,7 @@ $ $
 \input{\cestaDva Chapter2.tex}
 \input{\cestaTri Chapter3.tex}
 \input{\cestaCtyri Chapter4.tex}
+\input{\cestaSest Chapter6.tex}
 \input{\cestaZaver Concl.tex}
 %-----<<< -------- >>>-----
 
