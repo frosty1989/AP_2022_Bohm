@@ -236,29 +236,11 @@ The creation of a program that is compatible with a FANUC robotic arm controller
 After creating a program in the curve follow project, but before generating it using a post processor, the program is saved as a preprocessed/universal Python program and saved in a local temporary folder. The preprocessed program is linked to the right post processor (selected by the user in RoboDK). The post processor defines a \inline{RobotPost} class that generates the desired code. In the Windows operating system, the preprocessed Python files are saved in the user's temporary folder (e.g.: \inline{C:/Users/username/AppData/Local/Temp}). These programs can also be used for debugging new post processors. A code snippet of a preprocessed file is shown in Listing \ref{code:preprocessed_python} \cite{preprocessed}. The three dots (...) denote parts of the code that have been intentionally omitted to keep the source code listing shorter. 
 
 
-%% Example of how to use the listings and captions correctly
-%% Using the multiline comment feature here
-\begin{comment}
 
-\begin{code}
-
-\begin{minted}{c}
-int main() {
-printf("hello, world");
-return 0;
-}
-\end{minted}
-\captionof{listing}{My C-Code}
-\label{code:c-code}
-\end{code}
-
-Reference to \ref{code:c-code}. 
-
-\end{comment}
 
 %% this is an example of a minted code with caption and wrapped lines
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Code snippet of preprocessed program to be executed by post processor},captionpos=b,label={code:preprocessed_python}]
 import sys
 import os
 sys.path.append(os.path.abspath(r"""C:/RoboDK/Posts/""")) # temporarily add path to POSTS folder
@@ -305,9 +287,9 @@ r.MoveL(p(--16.1785,41.074,185,107.509,0,180), [--9.29955,0.844572,--28.2678,94.
 r.ProgFinish(r"""Settings""")
 r.ProgSave(r"""C:/Users/marek.boehm/Documents/RoboDK/""", r"""Settings""", False, r"""C:/RoboDK/Other/VSCodium/VSCodium.exe""")
 
+
 \end{lstlisting}
-\captionof{listing}{Code snippet of preprocessed program to be executed by post processor}
-\label{code:preprocessed_python}
+
 
 
 %% \captionof{listing}{Code snippet of preprocessed program to be executed by post processor}
@@ -317,11 +299,9 @@ Let us dive into the source code of this preprocessed file and explain the funct
 
 
 %% RobotPost class
-\begin{minted}[frame=lines,tabsize=2,breaklines]{python}
-
+\begin{lstlisting}[frame=lines,numbers=none,breaklines=true]{python}
 class samplepost.RobotPost(robotpost=None, robotname=None, robot_axes=6, **kwargs)
-
-\end{minted}
+\end{lstlisting}
 
 The \inline{RobotPost} class initializes the robot post processor object. 
 The parameters of the \inline{RobotPost} class are:
@@ -347,11 +327,9 @@ All subsequent functions are called upon the \inline{RobotPost} object. The most
 
 %%%%%%%%%%%%%%%%%%
 %% MoveL method
-\begin{minted}[frame=lines,tabsize=2,breaklines]{python}
-
+\begin{lstlisting}[frame=lines,numbers=none,breaklines=true]{python}
 MoveL(pose, joints, conf_RLF=None)
-
-\end{minted}
+\end{lstlisting}
 
 The \inline{MoveL} method generates manufacturer-specific code for linear movement. 
 
@@ -373,11 +351,9 @@ The parameters of the \inline{MoveL} method are:
 
 %%%%%%%%%%%%%%%%%%
 %% ProgStart method
-\begin{minted}[frame=lines,tabsize=2,breaklines]{python}
-
+\begin{lstlisting}[frame=lines,numbers=none,breaklines=true]{python}
 ProgStart(progname)
-
-\end{minted}
+\end{lstlisting}
 
 The \inline{ProgStart} method is called when a new program is generated.
 
@@ -392,11 +368,9 @@ The parameters of the \inline{ProgStart} method are:
 
 %%%%%%%%%%%%%%%%%%
 %% setSpeed method
-\begin{minted}[frame=lines,tabsize=2,breaklines]{python}
-
+\begin{lstlisting}[frame=lines,numbers=none,breaklines=true]{python}
 setSpeed(speed_mms)
-
-\end{minted}
+\end{lstlisting}
 
 The \inline{setSpeed} method sets the linear robotic arm speed (in \SI{}{\mm\per\second}).
 
@@ -411,11 +385,9 @@ The parameters of the  \inline{setSpeed} method are:
 
 %%%%%%%%%%%%%%%%%%
 %% ProgSave method
-\begin{minted}[frame=lines,tabsize=2,breaklines]{python}
-
+\begin{lstlisting}[frame=lines,numbers=none,breaklines=true]{python}
 ProgSave(folder, progname, ask_user=False, show_result=False)
-
-\end{minted}
+\end{lstlisting}
 
 The \inline{ProgSave} method saves the program in a format compatible with the corresponding robot controller type. 
 
@@ -436,12 +408,9 @@ The parameters of the \inline{ProgSave} method are:
 
 %%%%%%%%%%%%%%%%%%
 %% ProgFinish method
-\begin{minted}[frame=lines,tabsize=2,breaklines]{python}
-
+\begin{lstlisting}[frame=lines,numbers=none,breaklines=true]{python}
 ProgFinish(progname)
-
-\end{minted}
-
+\end{lstlisting}
 The \inline{ProgFinish} method is triggered after all the instructions of the program and defines the end of the program.
 
 
@@ -474,9 +443,8 @@ Each robotic arm has a post processor assigned to it by default. The following s
 
 Examples of post processors can be found in the \href{https://github.com/ros-industrial/robodk_postprocessors}{Github repository}. An example of an output of the unmodified R--30iA post processor is shown in Listing \ref{code:unmodified_post}.
 
-\begin{code}
-\begin{minted}[frame=lines, linenos,tabsize=2,breaklines]{python}
 
+\begin{lstlisting}[caption={Code snippet of unmodified R--30iA post processor output},captionpos=b,label={code:unmodified_post}, language={}]
 /PROG  Diecast15
 /ATTR
 OWNER		= MNEDITOR;
@@ -570,47 +538,9 @@ P[439]{
 };
 /END
 
-\end{minted}
-\captionof{listing}{Code snippet of unmodified R--30iA post processor output}
-\label{code:unmodified_post}
-\end{code}
-
-\begin{comment}
-
-Let us dive into the code in Listing \ref{code:unmodified_post}, explain the purpose of its individual elements, and show the post processor methods that generate these elements. 
-The code in Listing \ref{code:metadata} contains metadata about the program and is not displayed on the pendant display. This metadata is generated by the post processor method \inline{ProgFinish}.
-
-\begin{code}
-\begin{minted}[frame=lines, linenos,tabsize=2,breaklines]{text}
-
-/PROG  Diecast15
-/ATTR
-OWNER		= MNEDITOR;
-COMMENT		= "RoboDK sequence";
-PROG_SIZE	= 0;
-CREATE		= DATE 31-12-14  TIME 12:00:00;
-MODIFIED	= DATE 31-12-14  TIME 12:00:00;
-FILE_NAME	= Diecast15;
-VERSION		= 0;
-LINE_COUNT	= 462;
-MEMORY_SIZE	= 0;
-PROTECT		= READ_WRITE;
-TCD:  STACK_SIZE	= 0,
-      TASK_PRIORITY	= 50,
-      TIME_SLICE	= 0,
-      BUSY_LAMP_OFF	= 0,
-      ABORT_REQUEST	= 0,
-      PAUSE_REQUEST	= 0;
-DEFAULT_GROUP	= 1,*,*,*,*,*,*;
-CONTROL_CODE	= 00000000 00000000;
-/MN
-
-\end{minted}
-\captionof{listing}{Code snippet of metada}
-\label{code:metadata}
-\end{code}
-
-\end{comment}
+\end{lstlisting}
+% \captionof{listing}{Code snippet of unmodified R--30iA post processor output}
+% \label{code:unmodified_post}
 
 
 \section{FANUC R--30iA post processor}
@@ -631,11 +561,9 @@ The experimental setup of the LSP station at the HiLASE centre links the robotic
 The modification involves the \inline{MoveL} method. The unmodified \inline{MoveL} method generates the following code:
 
 
-\begin{minted}[frame=lines,tabsize=2,breaklines]{text}
-
+\begin{lstlisting}[frame=lines,numbers=none,breaklines=true, language={}]
 n: L P[2] 4mm/sec CNT100;
-
-\end{minted}
+\end{lstlisting}
 
 
 where:
@@ -653,15 +581,13 @@ where:
 The modified \inline{MoveL} method should output the following robotic arm controller code to meet the requirements of the post processor:
 
 
-\begin{minted}[frame=lines,tabsize=2,breaklines]{text}
-
+\begin{lstlisting}[frame=lines,numbers=none,breaklines=true, language={}]
 n: WAIT DI[1:SYNCHRONIZATION_IN]=OFF;
 n+1: WAIT DI[1:SYNCHRONIZATION_IN]=ON;
 n+2: L P[6] 4mm/sec CNT100 TB  0.00sec,DO[5]=PULSE,1.0sec;
 n+3: WAIT  DO[5:LASER ON] = OFF;
 n+4: WAIT  1.00(sec);
-  
-\end{minted}
+\end{lstlisting}
 
 
 where:
@@ -681,9 +607,7 @@ where:
  Listing \ref{code:originalMoveL} contains the original \inline{MoveL} method of the FANUC R--30iA post processor and Listing \ref{code:modifiedMoveL} contains the modified \inline{MoveL} method \cite{postmethods}. 
 
 
-\begin{code}
-\begin{minted}[frame=lines, linenos,tabsize=2,breaklines]{python}
-
+\begin{lstlisting}[caption={Code snippet of original MoveL method},captionpos=b,label={code:originalMoveL}]
     def MoveL(self, pose, joints, conf_RLF=None):
         """Add a linear movement"""
         if self.LAST_POSE is not None:
@@ -702,14 +626,13 @@ where:
         self.LAST_POSE = pose
 
 
-\end{minted}
-\captionof{listing}{Code snippet of original MoveL method}
-\label{code:originalMoveL}
-\end{code}
+\end{lstlisting}
+%\captionof{listing}{Code snippet of original MoveL method}
+%\label{code:originalMoveL}
 
-\begin{code}
-\begin{minted}[frame=lines, linenos,tabsize=2,breaklines]{python}
 
+
+\begin{lstlisting}[caption={Code snippet of modified MoveL method},captionpos=b,label={code:modifiedMoveL}]
     def MoveL(self, pose, joints, conf_RLF=None):
         """Add a linear movement"""
         if self.LAST_POSE is not None:
@@ -743,21 +666,20 @@ where:
         self.LAST_POSE = pose
 
 
-\end{minted}
-\captionof{listing}{Code snippet of modified MoveL method}
-\label{code:modifiedMoveL}
-\end{code}
+\end{lstlisting}
+%\captionof{listing}{Code snippet of modified MoveL method}
+%\label{code:modifiedMoveL}
+
 
 %%%%%%%%%%%
 
 \subsection{Example output of the modified FANUC R--30iA post processor} 
 \label{sec:example}
 
-An example of an output of the unmodified R--30iA post processor is shown in Listing \ref{code:modified_post}.
+An example of an output of the modified R--30iA post processor is shown in Listing \ref{code:modified_post}.
 
-\begin{code}
-\begin{minted}[frame=lines, linenos,tabsize=2,breaklines]{python}
 
+\begin{lstlisting}[caption={Code snippet of modified R--30iA post processor output},captionpos=b,label={code:modified_post}, language={}]
 /PROG  Diecast15
 /ATTR
 OWNER		= MNEDITOR;
@@ -855,10 +777,10 @@ P[439]{
 };
 /END
 
-\end{minted}
-\captionof{listing}{Code snippet of modified R--30iA post processor output}
-\label{code:modified_post}
-\end{code}
+\end{lstlisting}
+% \captionof{listing}{Code snippet of modified R--30iA post processor output}
+% \label{code:modified_post}
+
 
 
 

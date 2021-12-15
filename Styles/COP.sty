@@ -281,6 +281,8 @@
 
 \usepackage{listings}
 
+%-----<<< PYTHON >>>-----
+%-----<<< ------ >>>-----
 
 \lstset{frame=,
     language=Python,
@@ -291,11 +293,12 @@
     basicstyle={\footnotesize\ttfamily},
     numbers=left,
     stepnumber=1,
-    numberstyle=\tiny\color{gray},
+    % numberstyle=\color{gray},
     keywordstyle=\color{blue},
     commentstyle=\color{dgreen},
     stringstyle=\color{mauve},
     breaklines=true,
+    postbreak=\mbox{{$\hookrightarrow$}\space},
     breakatwhitespace=true,
     tabsize=3
     } 
@@ -310,6 +313,7 @@
     language=Python,
     basicstyle=\footnotesize,
     numbers=left,
+    numberstyle=\tiny\color{black},
     stepnumber=1,
     showstringspaces=false,
     tabsize=1,
@@ -318,8 +322,10 @@
 }
 \end{comment}  
 
-% define tha basic style as inline
+% define basic style as inline
 \def\inline{\lstinline[basicstyle=\ttfamily,keywordstyle={}]}
+
+
 
 %-----<<< -------------------- >>>-----
 %-----<<< STYLE FOR REFERENCES >>>-----
